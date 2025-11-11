@@ -5,7 +5,7 @@ from pathlib import Path
 
 data = []
 
-for group_id in sorted(list(Path('posters').rglob('*/group_id'))):
+for group_id in sorted(list(Path('posters').rglob('*/*_group_id.txt'))):
     data.append(group_id.read_text().strip())
 
 Path('build/group_id.json').write_text(json.dumps(data, ensure_ascii=False))
@@ -17,7 +17,7 @@ Path(f'working/{i:05}.png').symlink_to(Path('blank.png').absolute())
 
 i = i + 1
     
-for png in sorted(list(Path('posters').rglob('*/poster.png'))):
+for png in sorted(list(Path('posters').rglob('*/*_poster.png'))):
     Path(f'working/{i:05}.png').unlink(missing_ok=True)
     Path(f'working/{i:05}.png').symlink_to(png.absolute())
     i = i + 1
